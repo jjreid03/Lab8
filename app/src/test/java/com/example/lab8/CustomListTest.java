@@ -1,16 +1,57 @@
 package com.example.lab8;
 
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 //import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 public class CustomListTest {
+
+    private CustomList list;
+
+    @BeforeEach
+    public void setUp(){
+        list = new CustomList(null, new ArrayList<>());
+    }
+
+    @Test
+    public void hasCityShouldReturnTrueIfCityExists() {
+        City city = new City("Estevan", "SK");
+        list.addCity(city);
+        assertTrue(list.hasCity(city));
+    }
+
+    @Test
+    public void hasCityShouldReturnFalseIfCityDoesNotExist() {
+        City city = new City("Estevan", "SK");
+        assertFalse(list.hasCity(city));
+    }
+
+    @Test
+    public void deleteCityShouldRemoveCityIfExists() {
+        City city = new City("Estevan", "SK");
+        list.addCity(city);
+        assertTrue(list.hasCity(city));
+        list.deleteCity(city);
+        assertFalse(list.hasCity(city));
+    }
+
+    @Test
+    public void countCitiesShouldReturnNumberOfCitiesInList() {
+        assertEquals(0, list.countCities());
+        list.addCity(new City("Estevan", "SK"));
+        assertEquals(1, list.countCities());
+        list.addCity(new City("Regina", "SK"));
+        assertEquals(2, list.countCities());
+    }
 
     /**
      * this gets size of the list
@@ -26,7 +67,7 @@ public class CustomListTest {
      * @param city
      */
     public void addCity(City city) {
-
+        cities.add(city);
     }
 
     private CustomList list;

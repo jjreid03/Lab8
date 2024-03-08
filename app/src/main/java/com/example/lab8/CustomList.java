@@ -17,10 +17,26 @@ public class CustomList extends ArrayAdapter<City> {
     private ArrayList<City> cities;
     private Context context;
 
+    private String name;
+
+
+    public boolean hasCity(City city) {
+        return cities.contains(city);
+    }
+
+    public void deleteCity(City city) {
+        cities.remove(city);
+    }
+
+
     public CustomList(Context context, ArrayList<City> cities) {
         super(context, 0, cities);
         this.cities = cities;
         this.context = context;
+    }
+
+    public int countCities() {
+        return cities.size();
     }
 
     @NonNull
